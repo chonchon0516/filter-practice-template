@@ -9,10 +9,10 @@ $pdo = new PDO(
 
 if(isset($_GET["search"])){
   $name = '%'. $_GET["search"]. '%';
-  $ccontents = '%' .$_GET["search"]. '%';
+  $contents = '%' .$_GET["search"]. '%';
 }else{
   $name = '%%';
-  $ccontents = '%%';
+  $contents = '%%';
 }
 
 $sql ='select * from pages where name like :name OR contents like :contents';
