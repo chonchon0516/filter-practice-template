@@ -6,8 +6,10 @@ $pdo = new PDO(
     $dbUserName,
     $dbPassword
 );
+$name = '%'. $_GET["search"]. '%';
+$contents = '%' .$_GET["search"]. '%';
 
-$sql = 'SELECT * FROM pages';
+$sql ='select * from pages where name like :name OR contents like :contents';
 $statement = $pdo->prepare($sql);
 $statement->bindValue(':title', $title, PDO::PARAM_STR);
 $statement->bindValue(':content', $content, PDO::PARAM_STR);
@@ -28,7 +30,7 @@ $pages = $statement->fetchAll(PDO::FETCH_ASSOC);
 <body>
   <div>
     <div>
-      <form action="index.php" method="get">
+      <form action="mypage.php" method="get">
         <div>
           <label>
             <input type="radio" name="order" value="desc" class="">
