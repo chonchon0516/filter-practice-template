@@ -7,15 +7,12 @@ $pdo = new PDO(
     $dbPassword
 );
 
- $order = $_GET['order'];
-//$sql = 'SELECT * FROM pages';
+$order = $_GET['order'] ?? 'desc';
 $sql ="select * from pages ORDER by created_at {$order}";
 $statement = $pdo->prepare($sql);
-// $statement->bindValue(":order", $order, PDO::PARAM_STR);
- 
 $statement->execute();
 $pages = $statement->fetchAll(PDO::FETCH_ASSOC);
-// var_dump($order);
+
 
 ?>
 
