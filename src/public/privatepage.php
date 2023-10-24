@@ -7,13 +7,13 @@ $pdo = new PDO(
     $dbPassword
 );
 
-$sql = 'SELECT * FROM pages';
+$order = $_GET['order'] ?? 'desc';
+$sql ="select * from pages ORDER by created_at {$order}";
 $statement = $pdo->prepare($sql);
-$statement->bindValue(':title', $title, PDO::PARAM_STR);
-$statement->bindValue(':content', $content, PDO::PARAM_STR);
-
 $statement->execute();
 $pages = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +29,7 @@ $pages = $statement->fetchAll(PDO::FETCH_ASSOC);
 <body>
   <div>
     <div>
-      <form action="index.php" method="get">
+      <form action="privatepage.php" method="get">
         <div>
           <label>
             <input type="radio" name="order" value="desc" class="">
